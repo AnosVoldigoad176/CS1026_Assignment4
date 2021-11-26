@@ -1,10 +1,12 @@
 class Country:
+    # Constructor
     def __init__(self, name, population, area, continent):
         self.name = name
         self.population = population
         self.area = area
         self.continent = continent
 
+    # Getters
     def getName(self):
         return self.name
 
@@ -17,6 +19,7 @@ class Country:
     def getContinent(self):
         return self.continent
 
+    # Setters
     def setPopulation(self, population):
         self.population = population
 
@@ -26,9 +29,10 @@ class Country:
     def setContinent(self, continent):
         self.continent = continent
 
+    # Representation
     def __repr__(self):
-        return "%s (pop: %d, size: %d) in %s" % (self.name, self.population, self.area, self.continent)
-
+        return "%s (pop: %s, size: %s) in %s" % (self.name, str(self.population).replace(',', ''),
+                                                 str(self.area).replace(',', ''), self.continent)
 
 # Test code for Country class
 # def main():
