@@ -113,22 +113,30 @@ class CountryCatalogue:
         :param fileName:
         :return:
         """
-        with open(fileName, 'w') as file:
-            # Write header
-            file.write("Country|Continent|Population|Area\n")
-            # Write the dictionary to file with the header format
-            for key in self.countryCat.keys():
-                line = self.countryCat[key].getName() + "|" + self.countryCat[key].getContinent() + "|" + \
+        count = 0
+        try:
+            with open(fileName, 'w') as file:
+                # Write header
+                file.write("Country|Continent|Population|Area\n")
+                # Write the dictionary to file with the header format
+                for key in sorted(self.countryCat.keys()):
+                    # Increment count for every line
+                    count += 1
+                    line = self.countryCat[key].getName() + "|" + self.countryCat[key].getContinent() + "|" + \
                         str(self.countryCat[key].getPopulation()) + "|" + str(self.countryCat[key].getArea()) + "\n"
-                file.write(line)
-
-    # TODO: Implement saveCountryCatalogue() to sorted alphabetically by country name, also add return value equal to
-    #  number of countries saved to file
-
+                    file.write(line)
+        # If there is any error, return -1
+        except Exception as e:
+            return -1
+        return count
 
 # Test code for CountryCatalogue class
-# def main():
-#     countryCat = CountryCatalogue("data.txt")
-#     countryCat.printCountryCatalogue()
-#
-# main()
+def main():
+    countryCat = CountryCatalogue("data3.txt")
+
+    countryCat.addCountry("Pogger", 100, 100, "North America")
+    countryCat.printCountryCatalogue()
+    countryCat.saveCountryCatalogue("ok.txt")
+
+
+main()
