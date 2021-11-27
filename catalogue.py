@@ -8,7 +8,6 @@ class CountryCatalogue:
         :param countryFile: Country data file
         """
         self.countryCat = {}
-
         try:
             with open(countryFile, 'r') as countryFile:
                 # Read first line as header
