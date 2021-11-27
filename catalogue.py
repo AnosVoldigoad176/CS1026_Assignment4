@@ -5,7 +5,7 @@ class CountryCatalogue:
     def __init__(self, countryFile):
         """
         __init__ take the country file and create a dictionary of country objects
-        :param countryFile:
+        :param countryFile: Country data file
         """
         self.countryCat = {}
 
@@ -29,8 +29,8 @@ class CountryCatalogue:
     def setPopulationOfCountry(self, countryObj, population):
         """
         setPopulationOfCountry take the country object and population you want to set to the country object
-        :param countryObj:
-        :param population:
+        :param countryObj: Country object
+        :param population: Population you want to set to the country object
         :return: Nothing, just set the population of the country object with updated population of the country
         """
         # Go through the dictionary and find the country object
@@ -42,8 +42,8 @@ class CountryCatalogue:
     def setAreaOfCountry(self, countryObj, area):
         """
         setAreaOfCountry take the country object and area you want to set to the country object
-        :param countryObj:
-        :param area:
+        :param countryObj: Country object
+        :param area: Country area you want to set to the country object
         :return: Nothing, just set the area of the country object with updated area of the country
         """
         # Go through the dictionary and find the country object
@@ -55,8 +55,8 @@ class CountryCatalogue:
     def setContinentOfCountry(self, countryObj, continent):
         """
         setContinentOfCountry take the country object and continent you want to set to the country object
-        :param countryObj:
-        :param continent:
+        :param countryObj: Country object
+        :param continent: Continent you want to set to the country object
         :return: Nothing, just set the continent of the country object with updated continent of the country
         """
         # Go through the dictionary and find the country object
@@ -69,34 +69,32 @@ class CountryCatalogue:
         """
         findCountry take the country object and find the country object in the dictionary.
         If the country object is found, return the country object otherwise return None
-        :param countryObj:
+        :param countryObj: Country object
         :return: Country object if found, None if not found
         """
         for key in self.countryCat.keys():
             # Check if the country object is in the dictionary
             if countryObj.getName() == key:
                 return self.countryCat[key]
-            # Else return None object
-            else:
-                return None
+        # Else return None object
+        return None
 
     def addCountry(self, countryName, countryPopulation, countryArea, countryContinent):
         """
         addCountry take country name, population, area and continent then add to the dictionary if it doesn't exists
-        :param countryName:
-        :param countryPopulation:
-        :param countryArea:
-        :param countryContinent:
+        :param countryName: Country name to add
+        :param countryPopulation: Country population to add
+        :param countryArea: Country area to add
+        :param countryContinent: Country continent to add
         :return: True if added, False if not added
         """
         for key in self.countryCat.keys():
             # Check if the country object is in the dictionary
-            if countryName == key:
+            if key == countryName:
                 return False
-            # Add new country object if it doesn't exist
-            else:
-                self.countryCat[countryName] = Country(countryName, countryPopulation, countryArea, countryContinent)
-                return True
+        # Add new country object if it doesn't exist
+        self.countryCat[countryName] = Country(countryName, countryPopulation, countryArea, countryContinent)
+        return True
 
     def printCountryCatalogue(self):
         """
@@ -110,15 +108,15 @@ class CountryCatalogue:
     def saveCountryCatalogue(self, fileName):
         """
         saveCountryCatalogue save the country dictionary to a file
-        :param fileName:
-        :return:
+        :param fileName: File you want to save the country dictionary to
+        :return: Count of country objects saved, -1 if failed
         """
         count = 0
         try:
             with open(fileName, 'w') as file:
                 # Write header
                 file.write("Country|Continent|Population|Area\n")
-                # Write the dictionary to file with the header format
+                # Write the dictionary to file with the header format and sorted by key
                 for key in sorted(self.countryCat.keys()):
                     # Increment count for every line
                     count += 1
@@ -127,16 +125,21 @@ class CountryCatalogue:
                     file.write(line)
         # If there is any error, return -1
         except Exception as e:
+            # print(e)
             return -1
         return count
 
+
 # Test code for CountryCatalogue class
-def main():
-    countryCat = CountryCatalogue("data3.txt")
-
-    countryCat.addCountry("Pogger", 100, 100, "North America")
-    countryCat.printCountryCatalogue()
-    countryCat.saveCountryCatalogue("ok.txt")
-
-
-main()
+# def main():
+#     countryCat = CountryCatalogue("data3.txt")
+#     print(countryCat.addCountry("Dogger", 100, 100, "North America"))
+#     # countryCat.printCountryCatalogue()
+#     # countryCat.saveCountryCatalogue("ok.txt")
+#     # print(countryCat.saveCountryCatalogue("ok.txt"))
+#     # print(countryCat.findCountry(Country("Dogger", 100, 100, "North America")))
+#     print(countryCat.addCountry("Dogger", 100, 500, "North America"))
+#     countryCat.printCountryCatalogue()
+#
+#
+# main()
