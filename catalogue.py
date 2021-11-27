@@ -41,10 +41,10 @@ class CountryCatalogue:
 
     def setAreaOfCountry(self, countryObj, area):
         """
-        setAreaOfCountry take the country object and area you want to set to the country object
-        :param countryObj: Country object
-        :param area: Country area you want to set to the country object
-        :return: Nothing, just set the area of the country object with updated area of the country
+        setAreaOfCountry take the country object and area you want to set to the country object.
+        :param countryObj: Country object.
+        :param area: Country area you want to set to the country object.
+        :return: Nothing, just set the area of the country object with updated area of the country.
         """
         # Go through the dictionary and find the country object
         for key in self.countryCat.keys():
