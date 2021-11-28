@@ -132,12 +132,11 @@ class CountryCatalogue:
 # Test code for CountryCatalogue class
 # def main():
 #     countryCat = CountryCatalogue("data3.txt")
-#     print(countryCat.addCountry("Dogger", 100, 100, "North America"))
-#     # countryCat.printCountryCatalogue()
-#     # countryCat.saveCountryCatalogue("ok.txt")
-#     # print(countryCat.saveCountryCatalogue("ok.txt"))
-#     # print(countryCat.findCountry(Country("Dogger", 100, 100, "North America")))
-#     print(countryCat.addCountry("Dogger", 100, 500, "North America"))
+#     print(countryCat.addCountry("Ehehe", 100, 100, "North America"))
+#     countryCat.printCountryCatalogue()
+#     print(countryCat.saveCountryCatalogue("ok.txt"))
+#     print(countryCat.findCountry(Country("Dogger", 100, 100, "North America")))
+#     print(countryCat.addCountry("Ehehe", 100, 500, "North America"))
 #     countryCat.printCountryCatalogue()
 #
 #
