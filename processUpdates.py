@@ -11,10 +11,10 @@ def countryValidator(string):
     :param string: Input string
     :return: True if valid, False if not
     """
-    string = string.strip()
-    if len(string) == 0:
+    string = string.strip()  # Remove trailing and leading spaces
+    if len(string) == 0:  # Check if country is empty
         return False
-    if all(c.isalpha() or c == '_' for c in string) and string[0].isupper():
+    if all(c.isalpha() or c == '_' for c in string) and string[0].isupper():  # Valid condition
         return True
     return False
 
@@ -26,13 +26,13 @@ def populationValidator(string):
     :return: True if valid, False if not
     """
     if string.strip().startswith("P="):
-        originalp = string.strip().replace("P=", '').replace(' ', '')
+        originalp = string.strip().replace("P=", '').replace(' ', '')  # Get original string without spaces
     else:
         return False
 
-    temporary = originalp.replace(',', '')
-    temporary = '{:,}'.format(int(temporary))
-    if originalp == temporary:
+    temporary = originalp.replace(',', '')  # Get temporary from original without ","
+    temporary = '{:,}'.format(int(temporary))  # Format to comma separated
+    if originalp == temporary:  # Check if original and temporary are equal
         return True
     return False
 
@@ -97,6 +97,7 @@ def processUpdates(countryFileName, updateFileName, badUpdateFileName):
             open("output.txt", "w").write("Update Unsuccessful\n")
             return False, None
 
+    # Open necessary files
     updateFile = open(updateFileName, "r")
     badUpdateFile = open(badUpdateFileName, "w")
 
@@ -119,18 +120,21 @@ def processUpdates(countryFileName, updateFileName, badUpdateFileName):
         if countryValidator(country):
             # Check if population, area and continent format is valid
             for element in lineListFormat[1:]:
+                # If element is population and population is not exists yet
                 if element.strip().startswith("P=") and population == "":
                     if populationValidator(element):
                         population = element.replace("P=", "").strip()
                     else:
                         badUpdateFile.write(line)
                         break
+                # If element is area and area is not exists yet
                 elif element.strip().startswith("A=") and area == "":
                     if areaValidator(element):
                         area = element.replace("A=", "").strip()
                     else:
                         badUpdateFile.write(line)
                         break
+                # If element is continent and continent is not exists yet
                 elif element.strip().startswith("C=") and continent == "":
                     if continentValidator(element):
                         continent = element.replace("C=", "").strip()
@@ -143,15 +147,19 @@ def processUpdates(countryFileName, updateFileName, badUpdateFileName):
             # Create country object
             countryObj = Country(country, population, area, continent)
             print(countryObj)
+            # If population is blank then no update to prevent overwrite
             if population != "":
                 countryCat.setPopulationOfCountry(countryObj, population)
                 population = ""
+            # If area is blank then no update to prevent overwrite
             if area != "":
                 countryCat.setAreaOfCountry(countryObj, area)
                 area = ""
+            # If continent is blank then no update to prevent overwrite
             if continent != "":
                 countryCat.setContinentOfCountry(countryObj, continent)
                 continent = ""
+        # Country not valid
         else:
             badUpdateFile.write(line)
             continue
